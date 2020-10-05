@@ -16,7 +16,6 @@ use Magento\Store\Model\ScopeInterface;
 
 class Data extends AbstractHelper
 {
-
     const XML_PATH_INTERNATIONAL_TELEPHONE_INPUT_MODULE_ENABLED = 'internationaltelephoneinput/general/enabled';
 
     const XML_PATH_INTERNATIONAL_TELEPHONE_MULTISELECT_COUNTRIES_ALLOWED = 'internationaltelephoneinput/general/allow';
@@ -77,7 +76,6 @@ class Data extends AbstractHelper
                 ],
             ],
             'dataScope' => $addressType . $method . '.telephone',
-            'dataScopePrefix' => $addressType . $method,
             'label' => __('Phone Number'),
             'provider' => 'checkoutProvider',
             'sortOrder' => 120,
@@ -92,5 +90,10 @@ class Data extends AbstractHelper
             'visible' => true,
             'focused' => false,
         ];
+    }
+
+    public function getDataScopePrefix($addressType, $method = '')
+    {
+        return $addressType . $method;
     }
 }
