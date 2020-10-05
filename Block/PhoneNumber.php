@@ -12,11 +12,11 @@
 
 namespace MaxMage\InternationalTelephoneInput\Block;
 
-use \Magento\Framework\View\Element\Template;
-use \Magento\Framework\View\Element\Template\Context;
-use \Magento\Framework\Serialize\Serializer\Json;
-use \MaxMage\InternationalTelephoneInput\Helper\Data;
-use \Magento\Directory\Api\CountryInformationAcquirerInterface;
+use Magento\Directory\Api\CountryInformationAcquirerInterface;
+use Magento\Framework\Serialize\Serializer\Json;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\Template\Context;
+use MaxMage\InternationalTelephoneInput\Helper\Data;
 
 class PhoneNumber extends Template
 {
@@ -40,18 +40,21 @@ class PhoneNumber extends Template
      * PhoneNumber constructor.
      * @param Context $context
      * @param Json $jsonHelper
+     * @param CountryInformationAcquirerInterface $countryInformation
+     * @param Data $helper
+     * @param array $data
      */
     public function __construct(
         Context $context,
         Json $jsonHelper,
         CountryInformationAcquirerInterface $countryInformation,
-        Data $helper
-    )
-    {
+        Data $helper,
+        array $data = []
+    ) {
         $this->jsonHelper = $jsonHelper;
         $this->helper = $helper;
         $this->countryInformation = $countryInformation;
-        parent::__construct($context);
+        parent::__construct($context, $data);
     }
 
     /**
@@ -60,7 +63,6 @@ class PhoneNumber extends Template
     public function phoneConfig()
     {
         $config  = [
-            "nationalMode" => false,
             "utilsScript"  => $this->getViewFileUrl('MaxMage_InternationalTelephoneInput::js/utils.js'),
             "preferredCountries" => [$this->helper->preferedCountry()]
         ];
