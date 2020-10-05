@@ -63,6 +63,7 @@ class PhoneNumber extends Template
     public function phoneConfig()
     {
         $config  = [
+            "nationalMode" => false,
             "utilsScript"  => $this->getViewFileUrl('MaxMage_InternationalTelephoneInput::js/utils.js'),
             "preferredCountries" => [$this->helper->preferedCountry()]
         ];
